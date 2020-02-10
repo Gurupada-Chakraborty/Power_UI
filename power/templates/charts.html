@@ -1,0 +1,224 @@
+{% extends 'base.html' %}
+
+<script>
+{% block jquery %}
+var endpoint = '/api/chart/data/'
+var defaultData = []
+var labels = [];
+$.ajax({
+    method: "GET",
+    url: endpoint,
+    success: function(data){
+        labels = data.labels
+        defaultData = data.default
+        setChart()
+    },
+    error: function(error_data){
+        console.log("error")
+        console.log(error_data)
+    }
+})
+
+function setChart(){
+    var ctx = document.getElementById("myChart");
+    var ctx2 = document.getElementById("myChart2");
+    var ctx3 = document.getElementById("myChart3");
+    var ctx4 = document.getElementById("myChart4");
+    var myChart = new Chart(ctx2, {
+    type: 'bar',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: '# of Votes',
+            data: defaultData,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+
+    var myChart2 = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: '# of Votes',
+            data: defaultData,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+
+    var myChart3 = new Chart(ctx3, {
+    type: 'polarArea',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: '# of Votes',
+            data: defaultData,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+
+    var myChart4 = new Chart(ctx4, {
+    type: 'radar',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: '# of Votes',
+            data: defaultData,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+}
+// var ctx = document.getElementById("myChart");
+
+
+
+{% endblock %}
+</script>
+
+{% block content %}
+
+<div class='row' url-endpoint='{% url "api-data" %}'>
+    <div class="col-md-3 col-sm-6 mr-auto">
+        <div class="card m-2 bg-dark text-white">
+            <div class="card-body text-center">
+              <canvas id="myChart" width="125" height="125"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 mr-auto">
+        <div class="card m-2 bg-dark text-white">
+            <div class="card-body text-center">
+              <canvas id="myChart2" width="125" height="125"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 mx-auto">
+        <div class="card m-2 bg-dark text-white">
+            <div class="card-body text-center">
+              <canvas id="myChart3" width="125" height="125"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 mx-auto">
+        <div class="card m-2 bg-dark text-white">
+            <div class="card-body text-center">
+              <canvas id="myChart4" width="125" height="125"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 col-sm-6 mx-auto mt-2">
+        <a class="weatherwidget-io" href="https://forecast7.com/en/22d5788d36/kolkata/" data-label_1="KOLKATA" data-label_2="WEATHER" data-theme="original" >KOLKATA WEATHER</a>
+<script>
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+</script>
+    </div>
+</div>
+
+{% endblock content %}
